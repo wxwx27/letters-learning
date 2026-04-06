@@ -1,0 +1,42 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Student profile information",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "name": { "type": "string", "description": "Student name" },
+        "className": { "type": "string", "description": "Class name (e.g., 101)" },
+        "seatNumber": { "type": "string", "description": "Seat number" },
+        "stars": { "type": "integer", "description": "Number of stars collected" },
+        "completedLetters": { "type": "array", "items": { "type": "string" }, "description": "List of completed letters" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "name", "className", "seatNumber"]
+    },
+    "Progress": {
+      "title": "Progress",
+      "description": "Individual letter progress",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "letter": { "type": "string" },
+        "strokeCompleted": { "type": "boolean" },
+        "wordCompleted": { "type": "boolean" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "letter"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/progress/{progressId}": {
+      "schema": "Progress",
+      "description": "Student progress tracking"
+    }
+  }
+}
